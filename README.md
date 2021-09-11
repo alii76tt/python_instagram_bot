@@ -6,7 +6,8 @@ An Instagram bot that can do many things written in Python.
 ![](Screenshot.png)
 
 ## Video
-[![python instagram bot](https://www.youtube.com/watch?v=K4SBRDJhn2I)]
+[![](https://www.youtube.com/v=K4SBRDJhn2I)]
+[![python instagram bot](https://img.youtube.com/vi/K4SBRDJhn2I/0.jpg)](https://www.youtube.com/watch?v=K4SBRDJhn2I)
 
 # Requirement
 colorama==0.4.4
