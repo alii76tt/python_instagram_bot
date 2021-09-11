@@ -13,14 +13,14 @@ An Instagram bot that can do many things written in Python.
 colorama==0.4.4
 selenium==3.141.0
 
-### Properties
+## Properties
 * Sign In
 * Get Followers
 * Get Following
 * Follow User (can do more than one)
 * Unfollow User (can do more than one)
 * Who Don't Follow Me
-* Whatch Story
+* Watch Story
 
 # Installation
 
