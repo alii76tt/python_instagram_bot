@@ -66,5 +66,5 @@ To add the file to path, paste it here (at this location) -> <br>
 $ git clone https://github.com/alii76tt/python_instagram_bot
 $ cd python_instagram_bot
 $ pip install -r requirements.txt
-$ python instagram.py
+$ python3 instagram.py
 ```
