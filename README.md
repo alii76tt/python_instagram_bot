@@ -24,7 +24,7 @@ An Instagram bot that can do many things written in Python.
 ### Prerequisites
 
 You will need the following for running this script-<br/>
->1)Python installed in your system<br/>
+>1)Python3 installed in your system<br/>
 >2)Firefox web browser with Firefox webdriver<br/>
 >3)pip<br/>
 >4)selenium==3.141.0<br/>
@@ -37,8 +37,8 @@ selenium==3.141.0
 
 ### Installation Instructions
 
-#### 1) Installing Python
-Site to download python https://www.python.org/downloads/
+#### 1) Installing Python3
+Site to download python3 https://www.python.org/downloads/
 
 #### 2) Installing Firefox
 ```elm
