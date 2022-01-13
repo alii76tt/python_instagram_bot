@@ -1,23 +1,9 @@
+from traceback import print_tb
 from selenium import webdriver
-from selenium.webdriver import Firefox, FirefoxProfile
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver import FirefoxProfile
 from selenium.webdriver.common.keys import Keys
-from getpass import getpass
-from colorama import Fore
 import time
-
-print(Fore.GREEN + """\n
-                               /'                                                             /'                /'
-                           --/'--                                                           /'              --/'--
-     O  ,____     ____     /' ____     ____      ____     ____     ,__________            /'__     ____     /'    
-   /'  /'    )  /'    )--/' /'    )  /'    )   )'    )--/'    )   /'    )     )         /'    )  /'    )--/'      
- /'  /'    /'  '---,   /' /'    /' /'    /'  /'       /'    /'  /'    /'    /'        /'    /' /'    /' /'        
-(__/'    /(__(___,/   (__(___,/(__(___,/(__/'        (___,/(__/'    /'    /(__       (___,/(__(___,/'  (__        
-                                     /'                                       -------                             
-                             /     /'                                                                             
-                            (___,/'                                                            twitter alii76tt                   
-""")
-    
+  
 class Instagram():
     def __init__(self, username, password):
         self.browserProfile = FirefoxProfile()
@@ -35,7 +21,18 @@ class Instagram():
         emailInput.send_keys("" + self.username)
         passwordInput.send_keys("" + self.password)
         passwordInput.send_keys(Keys.ENTER)
+        time.sleep(2)
+
+        try:
+            if self.browser.find_element_by_css_selector(".eiCW-"):
+                print("Your password incorrect!")
+                quit()
+        except:
+            print("Login successful.")
+            
         time.sleep(5)
+
+        
 
     def getFollowers(self):
         self.browser.get(
@@ -48,6 +45,7 @@ class Instagram():
                 "//*[@id=\"react-root\"]/section/main/div/header/section/ul/li[2]/a").click()
 
             Instagram.scrollDown(self)
+            
             followers = self.browser.find_elements_by_css_selector(
                     ".FPmhX.notranslate._0imsa")
             
@@ -96,7 +94,10 @@ class Instagram():
                  
         
         try:
-            self.browser.find_element_by_css_selector("._5f5mN.jIbKX._6VtSN.yZn4P").click()
+            try:
+                self.browser.find_element_by_css_selector("._5f5mN.jIbKX._6VtSN.yZn4P").click()
+            except:     
+                self.browser.find_element_by_css_selector(".sqdOP.L3NKy.y3zKF").click()
             print(f"{username} is following.")
             
         except Exception:
@@ -108,10 +109,14 @@ class Instagram():
         time.sleep(4)
          
         try:
-            followButton = self.browser.find_element_by_css_selector("._5f5mN.jIbKX._6VtSN.yZn4P")
+            self.browser.find_element_by_css_selector("._5f5mN.jIbKX._6VtSN.yZn4P")
             print(f"You don't already follow {username}.")
-        except Exception:
-            self.browser.find_element_by_css_selector("._5f5mN.-fzfL._6VtSN.yZn4P").click()
+        except:
+            try:
+                self.browser.find_element_by_css_selector("._5f5mN.-fzfL._6VtSN.yZn4P").click()
+            except:
+                self.browser.find_element_by_css_selector(".qF0y9.Igw0E.IwRSH.eGOV_._4EzTm.soMvl").click()
+                   
             unFollow = self.browser.find_element_by_css_selector(".aOOlW.-Cab_")
             time.sleep(3)
             unFollow.click()
@@ -170,56 +175,3 @@ class Instagram():
             pageDown = self.browser.execute_script(jsCommand)
             if end == pageDown:
                 break    
-
-print("Please Login!")
-username = input("Your Username: ")
-password =  getpass()
-print("\nPlease Wait. Log in...")
-
-instagram = Instagram(username=username, password=password)
-instagram.signIn()
-while True:
-    choice = int(input("""
-            Menu\n
-            1- Get Followers\n
-            2- Get Following\n
-            3- Folow User\n
-            4- UnFollow User\n
-            5- Who Don't Follow Me\n
-            6- Whatch Story\n
-            7- Exit\n
-            Choice: """))
-
-    if choice == 1:
-        instagram.getFollowers()
-    elif choice == 2:
-        instagram.getFollowing()
-    elif choice == 3:
-        howMany = int(input("How many people will you follow: "))
-
-        if howMany == 1:
-            user = input("Username: ")
-            instagram.followUser(username=user)
-        elif howMany > 1:
-            for i in range(howMany):
-                user = input("Username: ")
-                instagram.followUser(username=user)
-    elif choice == 4:
-        howMany = int(input("How many people will you unfollow: "))
-
-        if howMany == 1:
-            user = input("Username: ")
-            instagram.unFollowUser(username=user)
-        elif howMany > 1:
-            for i in range(howMany):
-                user = input("Username: ")
-                instagram.unFollowUser(username=user)
-    elif choice == 5:
-        instagram.whoDontFollowMe()
-    elif choice == 6:
-        user = input("Username: ")
-        instagram.whatchStory(username = user)
-    elif choice == 7:
-        break
-    else:
-        "You entered incorrectly!"
